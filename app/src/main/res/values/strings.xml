@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Pomodoro</string>
+    <string name="app_name_lower">pomodoro</string>
+    <string name="notification_content_title">Pomodoro timer</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_start_stop">Stop</string>
+    <string name="btn_add_timer">Add Timer</string>
+    <string name="default_timer">00:00:00</string>
+
+    <string name="timer_error_no_input">Enter timer duration!</string>
+    <string name="timer_error_large_input">Value too large! Maximum is 6000 minutes (100 hours)</string>
+    <string name="timer_finished">Timer #%1$s finished</string>
+    <string name="blinking_indicator_descr">Blinking circle</string>
+    <string name="restart_button_descr">Restart button</string>
+    <string name="delete_button_descr">Delete button</string>
+</resources>
