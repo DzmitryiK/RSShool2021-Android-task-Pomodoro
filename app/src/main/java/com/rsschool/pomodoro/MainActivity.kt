@@ -104,11 +104,11 @@ class MainActivity : AppCompatActivity(), StopwatchListener, LifecycleObserver {
         stopwatchAdapter.submitList(stopwatches.toList())
 
         if (isStarted) {
+            runningId = id
+
             timer?.cancel()
             timer = getCountDownTimer(stopwatches.find { it.id == id }!!, startTime)
             timer?.start()
-
-            runningId = id
         }
         else if (id == runningId) {
             timer?.cancel()
