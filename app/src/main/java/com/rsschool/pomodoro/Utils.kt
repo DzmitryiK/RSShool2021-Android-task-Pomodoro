@@ -9,6 +9,8 @@ const val COMMAND_ID = "COMMAND_ID"
 const val STARTED_TIMER_TIME_MS = "STARTED_TIMER_TIME"
 const val STARTED_TIMER_NO = "STARTED_TIMER_NO"
 
+var TASK_REMOVED = false
+
 fun Long.displayTime(): String {
     if (this <= 0L) {
         return START_TIME

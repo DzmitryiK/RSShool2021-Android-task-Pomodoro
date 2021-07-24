@@ -1,13 +1,15 @@
 package com.rsschool.pomodoro
 
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rsschool.pomodoro.databinding.ActivityMainBinding
 
@@ -78,7 +80,7 @@ class MainActivity : AppCompatActivity(), StopwatchListener, LifecycleObserver {
     private fun changeStopwatch(id: Int, currentMs: Long?, isStarted: Boolean) {
         var cms: Long?
         var startTime = 0L
-        var otherFinished = false
+        var otherFinished: Boolean
 
 
         for (i in stopwatches.indices){
@@ -119,7 +121,7 @@ class MainActivity : AppCompatActivity(), StopwatchListener, LifecycleObserver {
         return object : CountDownTimer(startTime , UNIT_ONE_S) {
             val diff = Bundle()
             override fun onTick(millisUntilFinished: Long) {
-                if (stopwatch.currentMs == -1L)
+                if (stopwatch.currentMs == -1L || TASK_REMOVED)
                     cancel()
                 else {
                     Log.d("TIMER", "millisUntilFinished="+millisUntilFinished.toString()
@@ -178,5 +180,21 @@ class MainActivity : AppCompatActivity(), StopwatchListener, LifecycleObserver {
             stopIntent.putExtra(COMMAND_ID, COMMAND_STOP)
             startService(stopIntent)
         }
+    }
+
+    private val backInterval = UNIT_ONE_S+UNIT_ONE_S
+    private var mBackPressed = 0L
+
+    override fun onBackPressed() {
+        if (mBackPressed + backInterval > System.currentTimeMillis()) {
+            timer?.cancel()
+            runningId = -1
+            super.onBackPressed()
+            return
+        } else {
+            Toast.makeText(baseContext, resources.getString(R.string.back_warning), Toast.LENGTH_SHORT)
+                .show()
+        }
+        mBackPressed = System.currentTimeMillis()
     }
 }

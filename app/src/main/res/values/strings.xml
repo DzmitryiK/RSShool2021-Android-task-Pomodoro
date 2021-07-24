@@ -9,6 +9,7 @@
 
     <string name="timer_error_no_input">Enter timer duration!</string>
     <string name="timer_error_large_input">Value too large! Maximum is 6000 minutes (100 hours)</string>
+    <string name="back_warning">Tap Back again to close app</string>
     <string name="timer_finished">Timer #%1$s finished</string>
     <string name="blinking_indicator_descr">Blinking circle</string>
     <string name="restart_button_descr">Restart button</string>

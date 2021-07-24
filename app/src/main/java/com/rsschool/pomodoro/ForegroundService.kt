@@ -30,9 +30,6 @@ class ForegroundService : Service() {
             .setContentIntent(getPendingIntent())
             .setSilent(true)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-
-           // .setAutoCancel(true)
-           // .setOngoing(false)
     }
 
     override fun onCreate() {
@@ -146,14 +143,12 @@ class ForegroundService : Service() {
         return PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_ONE_SHOT)
     }
 
-/*
+
     override fun onTaskRemoved(rootIntent: Intent?) {
         commandStop()
-        //stop service
-        //this.stopSelf()
+        TASK_REMOVED = true
         super.onTaskRemoved(rootIntent);
-
-    }*/
+    }
 
 
     private companion object {

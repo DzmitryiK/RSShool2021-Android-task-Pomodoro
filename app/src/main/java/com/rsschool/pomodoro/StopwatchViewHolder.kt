@@ -2,15 +2,11 @@ package com.rsschool.pomodoro
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.rsschool.pomodoro.databinding.StopwatchItemBinding
 import androidx.lifecycle.*
-import kotlinx.coroutines.*
 
 class StopwatchViewHolder(
     private val binding: StopwatchItemBinding,
@@ -23,9 +19,9 @@ class StopwatchViewHolder(
         refreshCurrentState(stopwatch)
 
         if (stopwatch.isStarted) {
-            startTimer(stopwatch)
+            startTimer()
         } else {
-            stopTimer(stopwatch)
+            stopTimer()
         }
 
         initButtonsListeners(stopwatch)
@@ -38,9 +34,9 @@ class StopwatchViewHolder(
             when {
                 (e as Bundle).containsKey("isStarted") -> {
                     if (e.getBoolean("isStarted")) {
-                        startTimer(stopwatch)
+                        startTimer()
                     } else {
-                        stopTimer(stopwatch)
+                        stopTimer()
                     }
                     refreshCurrentState(stopwatch)
                 }
@@ -49,7 +45,7 @@ class StopwatchViewHolder(
                 }
                 e.containsKey("isFinished") -> {
                     refreshCurrentState(stopwatch)
-                    stopTimer(stopwatch)
+                    stopTimer()
                 }
             }
         }
@@ -71,16 +67,16 @@ class StopwatchViewHolder(
         binding.deleteButton.setOnClickListener { listener.delete(stopwatch.id) }
     }
 
-    private fun startTimer(stopwatch: Stopwatch) {
+    private fun startTimer() {
         binding.startStopButton.text = resources.getString(R.string.btn_start_stop)
 
         binding.blinkingIndicator.isInvisible = false
-        val myvec = AnimatedVectorDrawableCompat.create(this.binding.root.context,R.drawable.blinking_circle_vector)
-        binding.blinkingIndicator.setImageDrawable(myvec)
-        myvec?.start()
+        val myVec = AnimatedVectorDrawableCompat.create(this.binding.root.context,R.drawable.blinking_circle_vector)
+        binding.blinkingIndicator.setImageDrawable(myVec)
+        myVec?.start()
     }
 
-    private fun stopTimer(stopwatch: Stopwatch) {
+    private fun stopTimer() {
         binding.startStopButton.text =  resources.getString(R.string.btn_start)
 
         binding.blinkingIndicator.isInvisible = true

@@ -7,7 +7,6 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.AttrRes
-import kotlin.math.roundToLong
 
 class CircularProgressBar @JvmOverloads constructor(
     context: Context,
@@ -41,7 +40,7 @@ class CircularProgressBar @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (periodMs == 0L || currentMs == 0L) return
+        if (periodMs == 0L /*|| currentMs == 0L*/) return
         val startAngel = 360 - (((currentMs % periodMs).toFloat() / periodMs) * 360)
         canvas.drawArc(
             0f,
@@ -59,7 +58,7 @@ class CircularProgressBar @JvmOverloads constructor(
      * Set lasted milliseconds
      */
     fun setCurrent(current: Long) {
-        currentMs = (current/1000L).toLong()*1000L
+        currentMs = (current/1000L) *1000L
         invalidate()
     }
 
@@ -67,7 +66,7 @@ class CircularProgressBar @JvmOverloads constructor(
      * Set time period
      */
     fun setPeriod(period: Long) {
-        periodMs = (period/1000L).toLong()*1000L
+        periodMs = (period/1000L) *1000L
     }
 
     private companion object {
